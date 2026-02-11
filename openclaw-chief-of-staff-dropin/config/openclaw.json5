@@ -1,0 +1,92 @@
+// ~/.openclaw/openclaw.json
+// Safe-by-default configuration for a headless Chief of Staff.
+// Notes:
+// - Channels are disabled by default. Enable and configure them only after setting allowlists.
+// - Do not store API keys or bot tokens in this file if you can avoid it.
+//   Prefer OpenClaw's credential files and OAuth flows.
+
+{
+  identity: {
+    name: "CoS",
+    theme: "chief of staff",
+    emoji: "",
+  },
+
+  // Point OpenClaw at the workspace shipped in this zip
+  agent: {
+    workspace: "~/.openclaw/workspace",
+  },
+
+  // Secure DM mode so different senders do not share one context
+  session: {
+    dmScope: "per-channel-peer",
+  },
+
+  // Reduce message pileups: collect short bursts, then summarize if cap is hit
+  routing: {
+    groupChat: {
+      mentionPatterns: ["@openclaw", "openclaw"],
+      historyLimit: 50,
+    },
+    queue: {
+      mode: "collect",
+      debounceMs: 750,
+      cap: 20,
+      drop: "summarize",
+    },
+  },
+
+  // Commands are off by default (especially shell)
+  commands: {
+    native: "auto",
+    text: true,
+    bash: false,
+    config: false,
+    debug: false,
+    restart: false,
+  },
+
+  logging: {
+    level: "info",
+    file: "/tmp/openclaw/openclaw.log",
+    redactSensitive: "tools",
+  },
+
+  channels: {
+    defaults: {
+      dmPolicy: "pairing",
+      groupPolicy: "allowlist",
+    },
+
+    // Telegram (disabled by default)
+    // Enable only after setting allowFrom and group allowlists.
+    telegram: {
+      enabled: false,
+      dmPolicy: "allowlist",
+      allowFrom: [],
+      groupPolicy: "allowlist",
+      groupAllowFrom: [],
+      groups: { "*": { requireMention: true } },
+    },
+
+    // Slack (disabled by default)
+    // For Slack, use channel allowlists under channels.slack.channels.
+    slack: {
+      enabled: false,
+      groupPolicy: "allowlist",
+      channels: {},
+      dm: { enabled: true, allowFrom: [] },
+    },
+  },
+
+  agents: {
+    defaults: {
+      workspace: "~/.openclaw/workspace",
+      userTimezone: "America/New_York",
+      maxConcurrent: 2,
+    },
+  },
+
+  // Heartbeats are powerful and expensive. Enable only after you are stable.
+  // heartbeat: { every: "30m" },
+}

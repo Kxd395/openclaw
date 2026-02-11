@@ -1,0 +1,1 @@
+../../scripts/git_sync.sh

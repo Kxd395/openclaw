@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>ai.openclaw.chief-of-staff.git-sync</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/bash</string>
+      <string>-lc</string>
+      <string>"$HOME/.openclaw/workspace/ops/git_sync.sh"</string>
+    </array>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+      <key>Minute</key>
+      <integer>7</integer>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/tmp/openclaw-chief-of-staff-git-sync.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/openclaw-chief-of-staff-git-sync.err.log</string>
+  </dict>
+</plist>

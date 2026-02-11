@@ -1,0 +1,20 @@
+.DS_Store
+*.log
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+*.sqlite-wal
+*.sqlite-shm
+*.jsonl
+
+# Do not version daily memory logs by default
+workspace/memory/
+workspace/tmp/
+backups/
+
+# Secrets and credentials should never be committed
+.secrets/
+credentials/
+workspace/credentials/
